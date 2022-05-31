@@ -19,8 +19,7 @@ void setup () {
   appDisplayHeight= height;
   minim = new Minim(this); //leads from data directory loadFile should also load from project folder, similiar to loadImage
   song1 = minim.loadFile("MusicDownload/27 Shooting Stars In Summer ΓÇô Naoko Ikeda.mp3");//able to pass absolute pathway, file name, and URL
-  song1.play();//Parameters is milli-seconds from start of audio file to strat of playing
-
+  song1.loop(0);//Parameter is number of repeats 
   /*
   song2 = minim.loadFile("");
    song3 = minim.loadFile("");
@@ -33,6 +32,11 @@ void draw () {
 }//End draw
 //
 void keyPressed () {
+ 
+int loopNumber=0;
+if (key=='L' || key=='l') song1.loop(loopNumber);
+//if (key=='P' || key=='p' )song1.play();//Parameters is milli-seconds from start of audio file to strat of playing
+if (keyCode=='/') exit();
 }//End keyPressed
 //
 void mousePressed () {
