@@ -32,11 +32,21 @@ void draw () {
 }//End draw
 //
 void keyPressed () {
+  //Only press a number for this code,
+  //by pressing a number it will determine how many times the song loops
  
+  String keyString= String.valueOf(key);
+  println("Number of repeats is:", keyString);
+  int number= int(keyString);
+  song1.loop(number);
+  
+ //Previous Play ubtton and loop button
+ /*
 int loopNumber=0;
 if (key=='L' || key=='l') song1.loop(loopNumber);
 //if (key=='P' || key=='p' )song1.play();//Parameters is milli-seconds from start of audio file to strat of playing
 if (keyCode=='/') exit();
+*/
 }//End keyPressed
 //
 void mousePressed () {
