@@ -55,6 +55,13 @@ if (key=='L' || key=='l') song1.loop(loopNumber);
 if (key=='P' || key=='p' )song1.play();//Parameters is milli-seconds from start of audio file to strat of playing
 if (keyCode=='/') exit();
 
+//Mute button
+if ( song1.isMuted() ) {
+  song1.unmute();
+} else {
+ song1.mute();
+}
+
 }//End keyPressed
 //
 void mousePressed () {
