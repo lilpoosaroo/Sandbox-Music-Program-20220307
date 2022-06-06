@@ -65,12 +65,25 @@ void keyPressed () {
   */
 
   //Pause/Play button, Parameters is milli-seconds from start of audio file to strat of playing 
-  if ( (key=='p' || key=='P') && song1.isPlaying() ) {
-    song1.pause();
-  } else {
+  if ( (key=='p' || key=='P') ) {
+    if (song1.isPlaying() ) { 
+    song1.pause(); 
+  } else if ( song1.length() - song1.position() <= 1000 ) {
+  //To calculate the end of the song
+  song1.rewind();
+  song1.play();
+  }
+    
+    
+    
+  }  else  {
     song1.play();
   }
-  //
+  
+  //Forward/Reverse Button
+  //Built-in question: x.isPlaying()
+  if (key=='f' || key=='F'  ) song1.skip(1000) ; //skip forward 1 second, or 1000 milliseconds
+  if ( key=='r' || key=='R'  ) song1.skip(-1000); //skip backward
   //
   if (keyCode=='/') exit();
   //
