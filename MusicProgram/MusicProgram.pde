@@ -70,12 +70,11 @@ void keyPressed () {
     song1.pause(); 
   } else if ( song1.length() - song1.position() <= 1000 ) {
   //To calculate the end of the song
+  //Alternate forumala: song1.position() >= song1.length()-song1.length()*1/5, 
+  //this means if the song position is larger than 80% of the song length, 
+  //or what we classified as "the end", the song will rewind and play
   song1.rewind();
   song1.play();
-  }
-    
-    
-    
   }  else  {
     song1.play();
   }
