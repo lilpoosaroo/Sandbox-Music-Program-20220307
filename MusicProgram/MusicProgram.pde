@@ -10,9 +10,12 @@ import ddf.minim.ugens.*;
 float appDisplayWidth, appDisplayHeight;
 
 
+
 Minim minim; //creates an object that will be able to access all functions
 AudioPlayer song0, song1, song2, song3, song4, song5, song6; 
 //Creates a "PlayList" vairables holding extensions WAV, AIFF, AU, SNG, MP3
+AudioMetaData songMetaData1; //song1's meta data
+
 //
 void setup () {
   size(900, 400); //Display Geometry is mandatory, CHANGE TO FULLSCREEN
@@ -21,6 +24,11 @@ void setup () {
   minim = new Minim(this); //leads from data directory loadFile should also load from project folder, similiar to loadImage
   song1 = minim.loadFile("MusicDownload/27 Shooting Stars In Summer ΓÇô Naoko Ikeda.mp3");//able to pass absolute pathway, file name, and URL
   song1.loop(0);//Parameter is number of repeats 
+  songMetaData1 = song1.getMetaData(); //reads song meta 1, like song1, mimicking array notation
+  //
+  println("Start of Console");
+  println("Click the console to finish starting this program");
+  println("Title:", songMetaData1.title() );
   /*
   song2 = minim.loadFile("");
    song3 = minim.loadFile("");
@@ -30,6 +38,13 @@ void setup () {
 }//End setup
 //
 void draw () {
+  
+  
+  println("Start of Console");
+  println("Click the console to finish starting this program");
+  println("Title:", songMetaData1.title() );
+  
+  
   if (song1.isLooping() ) println("There are:", song1.loopCount(), "loops left.");
   if (song1.isPlaying() && !song1.isLooping()) println("Playing once"); //! means not
   //
@@ -56,50 +71,52 @@ void keyPressed () {
   if (key=='L' || key=='l') song1.loop(loopNumber);
   /*
    //Mute button
-  
-  if ( (key=='m' || key=='M') && song1.isMuted() ) {
-    song1.unmute();
-  } else {
-    song1.mute();
-  }
-  */
+   
+   if ( (key=='m' || key=='M') && song1.isMuted() ) {
+   song1.unmute();
+   } else {
+   song1.mute();
+   }
+   */
 
   //Pause/Play button, Parameters is milli-seconds from start of audio file to strat of playing 
   if ( (key=='p' || key=='P') ) {
     if (song1.isPlaying() ) { 
-    song1.pause(); 
-  } else if ( song1.length() - song1.position() <= 1000 ) {
-  //To calculate the end of the song
-  //Alternate forumala: song1.position() >= song1.length()-song1.length()*1/5, 
-  //this means if the song position is larger than 80% of the song length, 
-  //or what we classified as "the end", the song will rewind and play
-  song1.rewind();
-  song1.play();
-  }  else  {
-    song1.play();
-  }
-  
-  //Forward/Reverse Button
-  //Built-in question: x.isPlaying()
-  if (key=='f' || key=='F'  ) song1.skip(1000) ; //skip forward 1 second, or 1000 milliseconds
-  if ( key=='r' || key=='R'  ) song1.skip(-1000); //skip backward
-  //
-  if (keyCode=='/') exit();
-  //
-  
-  // 
-  if (key=='s' || key=='S') {
-    if ( song1.isPlaying() ) {
       song1.pause();
+    } else if ( song1.length() - song1.position() <= 1000 ) {
+      //To calculate the end of the song
+      //Alternate forumala: song1.position() >= song1.length()-song1.length()*1/5, 
+      //this means if the song position is larger than 80% of the song length, 
+      //or what we classified as "the end", the song will rewind and play
       song1.rewind();
+      song1.play();
     } else {
-      song1.rewind();
+      song1.play();
     }
   }
-}//End keyPressed
-//
-void mousePressed () {
-}//End mousepressed
-//
-//End MAIN program
-//
+
+    //Forward/Reverse Button
+    //Built-in question: x.isPlaying()
+    if (key=='f' || key=='F'  ) song1.skip(1000) ; //skip forward 1 second, or 1000 milliseconds
+    if ( key=='r' || key=='R'  ) song1.skip(-1000); //skip backward
+    //
+    if (keyCode=='/') exit();
+    //
+
+    // 
+    if (key=='s' || key=='S') {
+      if ( song1.isPlaying() ) {
+        song1.pause();
+        song1.rewind();
+      } else {
+        song1.rewind();
+      }
+    }
+ 
+  }//End keyPressed
+  //
+  void mousePressed () {
+  }//End mousepressed
+  //
+  //End MAIN program
+  //
