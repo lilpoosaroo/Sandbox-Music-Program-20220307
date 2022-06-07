@@ -26,11 +26,12 @@ void setup () {
   appDisplayWidth= width;
   appDisplayHeight= height;
   minim = new Minim(this); //leads from data directory loadFile should also load from project folder, similiar to loadImage
-  song[0] = minim.loadFile("MusicDownload/27 Shooting Stars In Summer ΓÇô Naoko Ikeda.mp3");//able to pass absolute pathway, file name, and URL
-  song[1] = minim.loadFile("MusicDownload/15 Consolation, Op. 30, No. 3 ΓÇô Felix Mendelssohn.mp3");
-  song[2] = minim.loadFile("MusicDownload/07 Fluttering Leaves, Op. 46, No. 11 ΓÇô Stephen Heller.mp3");
-  song[3] = minim.loadFile("MusicDownload/05 In The Evening, Op. 88, No. 2 ΓÇô Heinrich Hofmann.mp3");
+  song[currentSong] = minim.loadFile("MusicDownload/27 Shooting Stars In Summer ΓÇô Naoko Ikeda.mp3");//able to pass absolute pathway, file name, and URL
+  song[currentSong+=1] = minim.loadFile("MusicDownload/15 Consolation, Op. 30, No. 3 ΓÇô Felix Mendelssohn.mp3");
+  song[currentSong+=1] = minim.loadFile("MusicDownload/07 Fluttering Leaves, Op. 46, No. 11 ΓÇô Stephen Heller.mp3");
+  song[currentSong+=1] = minim.loadFile("MusicDownload/05 In The Evening, Op. 88, No. 2 ΓÇô Heinrich Hofmann.mp3");
   //
+  currentSong-=currentSong;
   for (int i=currentSong; i<song.length; i+=1 ) {//could have also put i=i+1, i++
     songMetaData[i] = song[i].getMetaData();
     /* Which means
@@ -48,7 +49,6 @@ void setup () {
   println("Start of Console");
   println("Click the console to finish starting this program");
   println("Title:", songMetaData[currentSong].title() );
- 
 }//End setup
 //
 void draw () {
@@ -124,7 +124,7 @@ void keyPressed () {
   if (keyCode=='/') exit();
   //
 
-  // 
+  // Stop button
   if (key=='s' || key=='S') {
     if ( song[currentSong].isPlaying() ) {
       song[currentSong].pause();
@@ -133,6 +133,15 @@ void keyPressed () {
       song[currentSong].rewind();
     }
   }
+  //
+  if (key=='n' || key=='N') {
+    if ( song[currentSong].isPlaying() ) 
+    { //Serious problems, playing multiple songs at the same time
+    } else {
+      currentSong++;
+    }
+  }
+  //
 }//End keyPressed
 //
 void mousePressed () {
