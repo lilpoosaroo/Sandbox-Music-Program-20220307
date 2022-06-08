@@ -104,7 +104,7 @@ void keyPressed () {
   if ( (key=='p' || key=='P') ) {
     if (song[currentSong].isPlaying() ) { 
       song[currentSong].pause();
-    } else if ( song[currentSong].length() - song[currentSong].position() <= 1000 ) {
+    } else if (/*song[currentSong].position() >=*/ song[currentSong].length() - song[currentSong].position() <= 1000 ) {
       //To calculate the end of the song
       //Alternate forumala: song1.position() >= song1.length()-song1.length()*1/5, 
       //this means if the song position is larger than 80% of the song length, 
@@ -133,15 +133,30 @@ void keyPressed () {
       song[currentSong].rewind();
     }
   }
-  //
+  //Next Song button
   if (key=='n' || key=='N') {
     if ( song[currentSong].isPlaying() ) 
     { //Serious problems, playing multiple songs at the same time
+    song[currentSong].pause();
+    song[currentSong].rewind();
+     if ( currentSong >= song.length-1) { 
+        currentSong -= currentSong; //Makes the playlist start from the beginning
+      } else {
+        currentSong++;
+      }
     } else {
-      currentSong++;
+      if ( currentSong >= song.length-1) { 
+        currentSong -= currentSong; //Makes the playlist start from the beginning
+      } else {
+        currentSong++;
+      }
+      //if you just put currentSong++ without the if statement, will cause an error because it will keep pn adding 
+      //numbers above 3
+      song[currentSong].play();
     }
   }
-  //
+  //Previous Button
+  if () {}
 }//End keyPressed
 //
 void mousePressed () {
