@@ -139,24 +139,17 @@ void keyPressed () {
     { //Serious problems, playing multiple songs at the same time
     song[currentSong].pause();
     song[currentSong].rewind();
-     if ( currentSong >= song.length-1) { 
-        currentSong -= currentSong; //Makes the playlist start from the beginning
-      } else {
-        currentSong++;
-      }
+     Next_Catch ();
+     song[currentSong].play();
     } else {
-      if ( currentSong >= song.length-1) { 
-        currentSong -= currentSong; //Makes the playlist start from the beginning
-      } else {
-        currentSong++;
-      }
+      Next_Catch ();
       //if you just put currentSong++ without the if statement, will cause an error because it will keep pn adding 
       //numbers above 3
       song[currentSong].play();
     }
   }
   //Previous Button
-  if () {}
+  //if (song) {}
 }//End keyPressed
 //
 void mousePressed () {
